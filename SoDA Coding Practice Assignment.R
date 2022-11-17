@@ -36,6 +36,28 @@ ggplot(df, aes(polity, gen_occurred)) +
   geom_point() +
   stat_smooth(method = lm)
 
+# Line Graph
+ggplot(df, aes(gen_occurred, polity)) +
+  geom_line()
 
+# Only Use Countries with all 60 years so Data is less of a mess
+table(df$country)
+df2 <- df %>%
+  filter(country == 'Chile' |
+         country == 'China'|
+         country == 'Indonesia' |
+         country == 'Iran' |
+         country == 'Sri Lanka')
+
+# Plot 
+ggplot(df2, aes(gen_occurred, polity, colour = country)) +
+  geom_line()
+
+# Which years had most genocides?
+df3 <- df %>%
+  filter(gen_occurred == 1)
+
+count <- table(df3$year)
+barplot(count)
 
 
