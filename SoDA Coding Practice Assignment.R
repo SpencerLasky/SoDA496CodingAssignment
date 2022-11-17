@@ -26,6 +26,16 @@ df = merge(polity, genocides, by.x = c("country","year"), by.y = c("Entity","Yea
 # Assign genocide variable more appropriate name
 rename(df, gen_occurred = ...4)
 
+# Run simple linear regression 
+model <- lm(gen_occurred ~ polity, data = df)
+model
+
+# Plot simple linear regression
+library(ggplot2)
+ggplot(df, aes(polity, gen_occurred)) +
+  geom_point() +
+  stat_smooth(method = lm)
+
 
 
 
